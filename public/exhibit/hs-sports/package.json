@@ -1,0 +1,32 @@
+{
+  "name": "hs-sports",
+  "version": "2.3.0",
+  "description": "",
+  "main": "",
+  "devDependencies": {
+    "chalk": "^2.1.0",
+    "child-process-promise": "^2.2.1",
+    "console-timestamp": "^0.3.0",
+    "gh-pages": "^1.0.0",
+    "nodemon": "^1.12.0",
+    "simple-git": "^1.77.0"
+  },
+  "scripts": {
+    "deploy:sh": "./deploy.sh",
+    "dev:build": "node time --dev > public/dist/js/dev.app.js",
+    "git-deploy": "node git-deploy --dev",
+    "dev:deploy:major": "npm run dev:build; npm version major; node deploy --dev",
+    "dev:deploy:minor": "npm run dev:build; npm version minor; node deploy --dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techmsi/t.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/techmsi/t/issues"
+  },
+  "homepage": "https://github.com/techmsi/t#readme"
+}
