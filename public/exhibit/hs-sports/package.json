@@ -1,6 +1,6 @@
 {
   "name": "hs-sports",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "",
   "devDependencies": {
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev:build": "node time --dev > public/dist/js/dev.app.js",
-    "dev:deploy:major": "npm run dev:build; npm version minor; node deploy --dev",
+    "dev:deploy:major": "npm run dev:build; npm version major; node deploy --dev",
     "dev:deploy:minor": "npm run dev:build; npm version minor; node deploy --dev"
   },
   "repository": {
