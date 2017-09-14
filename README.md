@@ -2,6 +2,9 @@
 * expriment in auto deployment
 
 ## Usage
+`cd public/exhibit/hs-sports`
+
+### Run NPM Script
 `npm run dev:deploy:major`
 OR
 `npm run dev:deploy:minor`
