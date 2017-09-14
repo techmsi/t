@@ -27,5 +27,6 @@ git push origin $branchName
 
 # Checkout master again
 git checkout master
+git fetch
 # And restore the changes
 git stash pop
