@@ -26,7 +26,7 @@ echo "Push: Changes to $branchName";
 git push origin $branchName
 
 # Checkout master again
-git checkout master
-git fetch
-# And restore the changes
-git stash pop
+# git checkout master
+# git fetch
+# # And restore the changes
+# git stash pop
