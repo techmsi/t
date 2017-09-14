@@ -2,16 +2,27 @@
 set -o errexit # Exit on error
 
 timestamp=$(date +'%s');
-echo $timestamp;
 branchName="deploy-$timestamp";
+echo "Beginning automated deployment on $branchName";
+
 git stash save 'Before deploy' # Stash all changes before deploy
+
 git checkout $branchName;
+echo "Checkout: $branchName";
 # git merge master --no-edit # Merge in the master branch without prompting
-npm run dev:build # Generate the bundled Javascript and CSS
-if $(git commit -am $branchName); then # Commit the changes, if any
-  echo "Committed changes for $branchName";
+
+# Generate the bundled Javascript and CSS
+npm run dev:build
+# Commit the changes, if any
+if $(git commit -am $branchName); then 
+  echo "Commit: Changes for $branchName";
 fi
-# git push origin/$branchName # Deploy to Github
-echo "Pushed changes to $branchName";
-git checkout master # Checkout master again
-git stash pop # And restore the changes
+
+# Deploy to Github
+git push origin/$branchName 
+echo "Push: Changes to $branchName";
+
+# Checkout master again
+git checkout master
+# And restore the changes
+git stash pop
