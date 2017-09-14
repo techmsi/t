@@ -11,9 +11,8 @@ const now = new Date();
 
 const options = {
   branch: 'master',
-  dest: `${PROJECT_NAME}/public/dist`,
+  dest: `public/exhibit/${PROJECT_NAME}/public/dist`,
   add: true,
-  tag: `v.hss.${version}`,
   src: isDev ? '**/dev.*' : '**/app.*',
   message: `${PROJECT_NAME} ${version}: ${isDev ? 'Dev' : 'Prod'} - ${timestamp('Automated Build on MM/DD/YYYY at hh:mm', now)}`
 };
