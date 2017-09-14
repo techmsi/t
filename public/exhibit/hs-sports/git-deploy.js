@@ -49,7 +49,7 @@ git()
           console.log('Pushed origin', branchName);
         });
     }
-  });
+  })
   .checkout(['origin', 'master'], function () {
     console.log("Checked out origin/master")
-  })
+  });
