@@ -11,9 +11,10 @@
     "simple-git": "^1.77.0"
   },
   "scripts": {
+    "build": "node time > public/dist/js/app.js",    
+    "deploy": "node git-deploy",
     "dev:build": "node time --dev > public/dist/js/dev.app.js",
-    "dev:deploy": "node git-deploy --dev",
-    "deploy": "node git-deploy"
+    "dev:deploy": "node git-deploy --dev"
   },
   "repository": {
     "type": "git",
