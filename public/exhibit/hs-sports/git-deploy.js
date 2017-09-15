@@ -2,7 +2,10 @@ const DIST_BUILD_TIME = 5000;
 const chalk = require('chalk');
 const { black, bgGreen, yellow } = chalk;
 
-const { name:PROJECT_NAME, version, repository: { url : repo } } = require('./package.json');
+const exc = require('child-process-promise').exec;
+const timestamp = require('console-timestamp');
+var path = require('path');
+
 const pipeOutput = (command, stdout, stderr) => {
   stdout.pipe(process.stdout);
   stderr.pipe(process.stderr);
@@ -10,25 +13,31 @@ const pipeOutput = (command, stdout, stderr) => {
 const git = require('simple-git');
 const gitH = git().outputHandler(pipeOutput);
 
-const exc = require('child-process-promise').exec;
-const timestamp = require('console-timestamp');
-var path = require('path');
-
+const { name: PROJECT_NAME, version, repository: { url : repo } } = require('./package.json');
 const isDev = process.argv.indexOf('--dev') !== -1;
 const now = new Date();
+
 const branchName = `build_${timestamp('MM-DD-YYYY_hh-mm-ss', now)}`;
 const message = `${PROJECT_NAME} ${version}: ${isDev ? 'Dev' : 'Prod'} - ${timestamp('Automated Build on MM/DD/YYYY at hh:mm', now)}`;
-const distDir = 'public/dist/';
 
-const logTask = (task) => console.log(`${black.bgGreen(task)} - ${yellow(branchName)}`);
+const buildCommand = `npm run ${isDev ? 'dev:' : ''}build`;
+const logTask = (task) => console.log(`\n${black.bgGreen(task)} - ${yellow(branchName)}\n`);
+const createDistFiles = (cmd = buildCommand) => exc(cmd);
 
 function getDistFromModifiedFiles (modified) {
-  return modified.length === 0 ? null : modified
-    .filter(o => o.indexOf('dev.') !== -1)
-    .map(o => o.match(/(public\/dist\/).+/)[0]);
+  let distFiles = null;
+  
+  if (modified.length === 0) {
+    return null;
+  } else if (isDev) {
+    distFiles = modified
+    .filter(o => o.indexOf('dev.') !== -1);
+  } else {
+    distFiles = modified
+    .filter(o => o.indexOf('dev.') === -1);
+  }
+  return distFiles.map(o => o.match(/(public\/dist\/).+/)[0]);
 }
-
-const createDistFiles = (cmd = 'npm run dev:build') => exc(cmd);
 
 function addCommitPushFiles (files) {
   if (files) {
@@ -36,13 +45,13 @@ function addCommitPushFiles (files) {
       .add(files, (err) => {
         logTask('3) Added files', files);
       })
-      .commit(message, function () {
+      .commit(message, () => {
         logTask('4) Committed to');
       })
-      .push(['origin', branchName], function () {
+      .push(['origin', branchName], () => {
         logTask('5) Pushed origin');
       })
-      .checkout(['master'], function () {
+      .checkout(['master'], () => {
         logTask('6) Checked out local master');
       });
   } else {

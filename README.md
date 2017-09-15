@@ -1,13 +1,15 @@
 # t
-* expriment in auto deployment
+* Auto deployment of static files
 
 ## Usage
 `cd public/exhibit/hs-sports`
 
 ### Run NPM Script
-`npm run dev:deploy:major`
-OR
-`npm run dev:deploy:minor`
+
+### Developmeent/QA
+`npm run dev:deploy`
+#### Production
+`npm run deploy`
 
 ## Tasks
 1) Bump version
@@ -15,4 +17,4 @@ OR
 3) Deploy to remote
 
 ## Debug
-`NODE_DEBUG=gh-pages npm run dev:deploy:major`
+`NODE_DEBUG=gh-pages npm run dev:deploy`
