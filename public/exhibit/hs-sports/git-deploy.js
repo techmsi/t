@@ -1,6 +1,6 @@
 const DIST_BUILD_TIME = 5000;
 const chalk = require('chalk');
-const { black, bgGreen, yellow } = chalk;
+const { black, bgGreen, bgBlack, yellow } = chalk;
 
 const exc = require('child-process-promise').exec;
 const timestamp = require('console-timestamp');
@@ -58,6 +58,10 @@ function addCommitPushFiles (files) {
     logTask('No files to add ', files);
   }
 }
+
+console.log(`${PROJECT_NAME} ${version}`);
+console.log((`Starting Automated Deployment for ${yellow.bgBlack(isDev ? 'Dev' : 'Prod')}`);
+console.log(`${yellow.bgBlack(timestamp('MM/DD/YYYY at hh:mm', now))}\n\n`);
 
 git()
   .checkoutBranch(branchName, 'origin/master', () => {
