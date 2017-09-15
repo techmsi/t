@@ -60,7 +60,7 @@ function addCommitPushFiles (files) {
 }
 
 console.log(`${PROJECT_NAME} ${version}`);
-console.log((`Starting Automated Deployment for ${yellow.bgBlack(isDev ? 'Dev' : 'Prod')}`);
+console.log(`Starting Automated Deployment for ${yellow.bgBlack(isDev ? 'Dev' : 'Prod')}`);
 console.log(`${yellow.bgBlack(timestamp('MM/DD/YYYY at hh:mm', now))}\n\n`);
 
 git()
