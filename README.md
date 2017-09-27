@@ -19,5 +19,5 @@
 ## Debug
 `NODE_DEBUG=gh-pages npm run dev:deploy`
 
-## Screenshot
+## Screenshots
 ![Dev](/screenshot.png?raw=true "Dev Deploy")
